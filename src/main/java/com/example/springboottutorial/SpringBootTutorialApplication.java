@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class SpringBootTutorialApplication {
 
@@ -22,8 +24,20 @@ public class SpringBootTutorialApplication {
     @Bean
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
-            createStudent(studentDAO);
+            createStudents(studentDAO);
         };
+    }
+
+    private void createStudents(StudentDAO studentDAO) {
+        log.info("Creating new student objects...");
+        var students = List.of(new StudentEntity("Carl", "Johnson", "cj2005@gmail.com"),
+                new StudentEntity("Sweet", "Johnson", "sj2005@gmail.com"),
+                new StudentEntity("Big", "Smoke", "bs2005@gmail.com"));
+        log.info("Saving the students...");
+        students.forEach(student -> {
+            log.info("Saved student {} {}", student.getFirstName(), student.getLastName());
+            studentDAO.save(student);
+        });
     }
 
     private void createStudent(StudentDAO studentDAO) {
