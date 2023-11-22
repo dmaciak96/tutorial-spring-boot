@@ -24,7 +24,7 @@ public class SpringBootTutorialApplication {
     @Bean
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
-            readStudent(studentDAO);
+            readAllStudents(studentDAO);
         };
     }
 
@@ -58,5 +58,13 @@ public class SpringBootTutorialApplication {
             var student = studentOptional.get();
             log.info("Student {} {} was found", student.getFirstName(), student.getLastName());
         }
+    }
+
+    private void readAllStudents(StudentDAO studentDAO) {
+        log.info("Reading all students....");
+        var students = studentDAO.findAll();
+        log.info("{} students was founded", students.size());
+        students.forEach(student ->
+                log.info(student.toString()));
     }
 }

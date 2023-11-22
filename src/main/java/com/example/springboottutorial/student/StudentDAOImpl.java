@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -24,5 +25,11 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public Optional<StudentEntity> findById(int id) {
         return Optional.ofNullable(entityManager.find(StudentEntity.class, id));
+    }
+
+    @Override
+    public List<StudentEntity> findAll() {
+        return entityManager.createQuery("FROM StudentEntity order by lastName", StudentEntity.class)
+                .getResultList();
     }
 }
