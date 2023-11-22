@@ -9,4 +9,6 @@ public interface StudentDAO {
     Optional<StudentEntity> findById(int id);
 
     List<StudentEntity> findAll();
+
+    List<StudentEntity> findByLastName(String lastName);
 }

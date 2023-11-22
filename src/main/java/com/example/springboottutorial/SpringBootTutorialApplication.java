@@ -66,5 +66,12 @@ public class SpringBootTutorialApplication {
         log.info("{} students was founded", students.size());
         students.forEach(student ->
                 log.info(student.toString()));
+
+        var lastName = "Johnson";
+        log.info("Reading all students by lastName: {}....", lastName);
+        var studentsByLastName = studentDAO.findByLastName(lastName);
+        log.info("{} students was founded", studentsByLastName.size());
+        studentsByLastName.forEach(student ->
+                log.info(student.toString()));
     }
 }
