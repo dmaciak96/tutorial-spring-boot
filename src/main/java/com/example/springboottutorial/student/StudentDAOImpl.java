@@ -4,6 +4,8 @@ import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
 public class StudentDAOImpl implements StudentDAO {
 
@@ -17,5 +19,10 @@ public class StudentDAOImpl implements StudentDAO {
     @Transactional
     public void save(StudentEntity studentEntity) {
         entityManager.persist(studentEntity);
+    }
+
+    @Override
+    public Optional<StudentEntity> findById(int id) {
+        return Optional.ofNullable(entityManager.find(StudentEntity.class, id));
     }
 }

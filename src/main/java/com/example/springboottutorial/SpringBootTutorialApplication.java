@@ -24,7 +24,7 @@ public class SpringBootTutorialApplication {
     @Bean
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
-            createStudents(studentDAO);
+            readStudent(studentDAO);
         };
     }
 
@@ -46,5 +46,17 @@ public class SpringBootTutorialApplication {
         log.info("Saving the student...");
         studentDAO.save(student);
         log.info("Saved student. Generated id: {}", student.getId());
+    }
+
+    private void readStudent(StudentDAO studentDAO) {
+        var id = 2;
+        log.info("Reading student by id {}....", id);
+        var studentOptional = studentDAO.findById(id);
+        if (studentOptional.isEmpty()) {
+            log.error("Student not found by id {}", id);
+        } else {
+            var student = studentOptional.get();
+            log.info("Student {} {} was found", student.getFirstName(), student.getLastName());
+        }
     }
 }
