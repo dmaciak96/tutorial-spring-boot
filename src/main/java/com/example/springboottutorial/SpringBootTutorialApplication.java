@@ -24,7 +24,8 @@ public class SpringBootTutorialApplication {
     @Bean
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
-            readAllStudents(studentDAO);
+            updateStudent(studentDAO);
+            deleteStudent(studentDAO);
         };
     }
 
@@ -73,5 +74,16 @@ public class SpringBootTutorialApplication {
         log.info("{} students was founded", studentsByLastName.size());
         studentsByLastName.forEach(student ->
                 log.info(student.toString()));
+    }
+
+    private void updateStudent(StudentDAO studentDAO) {
+        var source = new StudentEntity("Jan", "Kowalski", "jk@test.com");
+        studentDAO.update(source, 3);
+        log.info("Student successfully updated");
+    }
+
+    private void deleteStudent(StudentDAO studentDAO) {
+        studentDAO.delete(2);
+        log.info("Student successfully deleted");
     }
 }
