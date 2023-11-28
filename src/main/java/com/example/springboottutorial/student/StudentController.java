@@ -31,10 +31,4 @@ public class StudentController {
     public StudentEntity getStudentById(@PathVariable int id) {
         return studentDAO.findById(id);
     }
-
-    @ExceptionHandler
-    public ResponseEntity<ApiErrorResponse> handleStudentNotFoundException(StudentNotFoundException e) {
-        var error = new ApiErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage(), Instant.now());
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
 }
