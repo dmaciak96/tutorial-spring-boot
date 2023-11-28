@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class StudentDAOImpl implements StudentDAO {
@@ -27,7 +26,7 @@ public class StudentDAOImpl implements StudentDAO {
     public void update(StudentEntity source, int id) {
         var studentToUpdate = entityManager.find(StudentEntity.class, id);
         if (studentToUpdate == null) {
-            throw new IllegalArgumentException("Student not found by id " + id);
+            throw new StudentNotFoundException("Student not found by id " + id);
         }
 
         studentToUpdate.setEmail(source.getEmail());
@@ -41,14 +40,18 @@ public class StudentDAOImpl implements StudentDAO {
     public void delete(int id) {
         var studentToDelete = entityManager.find(StudentEntity.class, id);
         if (studentToDelete == null) {
-            throw new IllegalArgumentException("Student not found by id " + id);
+            throw new StudentNotFoundException("Student not found by id " + id);
         }
         entityManager.remove(studentToDelete);
     }
 
     @Override
-    public Optional<StudentEntity> findById(int id) {
-        return Optional.ofNullable(entityManager.find(StudentEntity.class, id));
+    public StudentEntity findById(int id) {
+        var student = entityManager.find(StudentEntity.class, id);
+        if (student == null) {
+            throw new StudentNotFoundException("Student not found by id " + id);
+        }
+        return student;
     }
 
     @Override

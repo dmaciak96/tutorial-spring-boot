@@ -1,7 +1,6 @@
 package com.example.springboottutorial.student;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface StudentDAO {
     void save(StudentEntity studentEntity);
@@ -10,7 +9,7 @@ public interface StudentDAO {
 
     void delete(int id);
 
-    Optional<StudentEntity> findById(int id);
+    StudentEntity findById(int id);
 
     List<StudentEntity> findAll();
 

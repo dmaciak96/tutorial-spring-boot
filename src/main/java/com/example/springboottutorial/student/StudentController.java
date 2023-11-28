@@ -1,12 +1,15 @@
 package com.example.springboottutorial.student;
 
+import com.example.springboottutorial.ApiErrorResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
+import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -26,6 +29,12 @@ public class StudentController {
 
     @GetMapping("/students/{id}")
     public StudentEntity getStudentById(@PathVariable int id) {
-        return studentDAO.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return studentDAO.findById(id);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ApiErrorResponse> handleStudentNotFoundException(StudentNotFoundException e) {
+        var error = new ApiErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage(), Instant.now());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }
