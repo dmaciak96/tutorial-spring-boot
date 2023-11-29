@@ -1,4 +1,4 @@
-package com.example.springboottutorial.student;
+package com.example.springboottutorial.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,15 +7,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.util.Objects;
-
 @Entity
-@Table(name = "student")
-public class StudentEntity {
+@Table(name = "employee")
+public class Employee {
 
+    // define fields
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     @Column(name = "first_name")
@@ -27,14 +26,19 @@ public class StudentEntity {
     @Column(name = "email")
     private String email;
 
-    public StudentEntity() {
+
+    // define constructors
+    public Employee() {
+
     }
 
-    public StudentEntity(String firstName, String lastName, String email) {
+    public Employee(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
+
+    // define getter/setter
 
     public int getId() {
         return id;
@@ -68,26 +72,22 @@ public class StudentEntity {
         this.email = email;
     }
 
+    // define toString
     @Override
     public String toString() {
-        return "StudentEntity{" +
+        return "Employee{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        StudentEntity that = (StudentEntity) o;
-        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email);
-    }
 }
+
+
+
+
+
+
+
+
