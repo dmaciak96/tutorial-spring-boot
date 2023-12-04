@@ -4,15 +4,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.hibernate.annotations.JdbcTypeCode;
 
+import java.sql.Types;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JdbcTypeCode(value = Types.VARCHAR)
+    private UUID id;
     private String title;
     private String isbn;
     private String publisher;
@@ -28,8 +32,12 @@ public class Book {
         this.authorId = authorId;
     }
 
-    public long getId() {
+    public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -54,10 +62,6 @@ public class Book {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getAuthorId() {
