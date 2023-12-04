@@ -23,9 +23,9 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         if (bookRepository.count() == 0) {
             log.info("Creating books...");
-            var bookOne = new Book(0, "Python. Instrukcje dla programisty. Wydanie III", "9788328904316", "Helion", null);
-            var bookTwo = new Book(1, "Czysty kod. Podręcznik dobrego programisty", "9788383223452", "Helion", null);
-            var bookThree = new Book(2, "Java. Rusz głową! Wydanie III", "9788328399853", "Helion", null);
+            var bookOne = new Book("Python. Instrukcje dla programisty. Wydanie III", "9788328904316", "Helion", null);
+            var bookTwo = new Book("Czysty kod. Podręcznik dobrego programisty", "9788383223452", "Helion", null);
+            var bookThree = new Book("Java. Rusz głową! Wydanie III", "9788328399853", "Helion", null);
             bookRepository.saveAll(List.of(bookOne, bookTwo, bookThree));
         }
     }
