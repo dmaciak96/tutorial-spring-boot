@@ -9,27 +9,25 @@ import java.util.Objects;
 public class Book {
 
     @Id
-    private int id;
+    private Long id;
     private String title;
     private String isbn;
     private String publisher;
+    private Long authorId;
 
     public Book() {
     }
 
-    public Book(int id, String title, String isbn, String publisher) {
+    public Book(long id, String title, String isbn, String publisher, Long authorId) {
         this.id = id;
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
+        this.authorId = authorId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -54,6 +52,18 @@ public class Book {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 
     @Override
