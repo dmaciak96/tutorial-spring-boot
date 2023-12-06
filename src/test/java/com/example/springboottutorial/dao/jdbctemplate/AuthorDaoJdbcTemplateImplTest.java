@@ -1,4 +1,4 @@
-package com.example.springboottutorial.dao.jdbc;
+package com.example.springboottutorial.dao.jdbctemplate;
 
 import com.example.springboottutorial.domain.Author;
 import org.junit.jupiter.api.Test;
@@ -6,17 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest
 @ComponentScan(basePackages = {"com.example.springboottutorial.dao"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class AuthorDaoJdbcImplTest {
+class AuthorDaoJdbcTemplateImplTest {
 
     @Autowired
-    AuthorDaoJdbcImpl authorDao;
+    AuthorDaoJdbcTemplateImpl authorDao;
 
     @Test
     void testGetById() {
@@ -49,7 +50,7 @@ class AuthorDaoJdbcImplTest {
     void testDelete() {
         var result = authorDao.save(new Author("Carl", "Johnson"));
         authorDao.delete(result.get().getId());
-        assertThat(authorDao.getById(result.get().getId()).isEmpty()).isTrue();
+        assertThrows(EmptyResultDataAccessException.class, () -> authorDao.getById(result.get().getId()));
     }
 
     @Test
