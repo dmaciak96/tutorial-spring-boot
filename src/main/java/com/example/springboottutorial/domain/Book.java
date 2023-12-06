@@ -20,12 +20,12 @@ public class Book {
     private String title;
     private String isbn;
     private String publisher;
-    private Long authorId;
+    private UUID authorId;
 
     public Book() {
     }
 
-    public Book(String title, String isbn, String publisher, Long authorId) {
+    public Book(String title, String isbn, String publisher, UUID authorId) {
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
@@ -64,11 +64,11 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Long getAuthorId() {
+    public UUID getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(Long authorId) {
+    public void setAuthorId(UUID authorId) {
         this.authorId = authorId;
     }
 

@@ -1,1 +1,1 @@
-alter table book ADD author_id bigint;
+alter table book ADD author_id varchar(255);

@@ -1,8 +1,10 @@
 package com.example.springboottutorial.dao.jdbc;
 
+import com.example.springboottutorial.dao.AuthorDao;
 import com.example.springboottutorial.domain.Author;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,7 +18,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AuthorDaoJdbcImplTest {
 
     @Autowired
-    AuthorDaoJdbcImpl authorDao;
+    @Qualifier("authorDaoJdbcImpl")
+    AuthorDao authorDao;
 
     @Test
     void testGetById() {
@@ -25,6 +28,7 @@ class AuthorDaoJdbcImplTest {
         assertThat(result.isPresent()).isTrue();
         assertThat(result.get().getFirstName()).isEqualTo("Carl");
         assertThat(result.get().getLastName()).isEqualTo("Johnson");
+        authorDao.delete(createdAuthor.get().getId());
     }
 
     @Test
@@ -34,6 +38,7 @@ class AuthorDaoJdbcImplTest {
         assertThat(result.isPresent()).isTrue();
         assertThat(result.get().getFirstName()).isEqualTo("Carl");
         assertThat(result.get().getLastName()).isEqualTo("Johnson");
+        authorDao.delete(createdAuthor.get().getId());
     }
 
     @Test
@@ -43,6 +48,7 @@ class AuthorDaoJdbcImplTest {
         assertThat(result.get().getId()).isNotNull();
         assertThat(result.get().getFirstName()).isEqualTo("Carl");
         assertThat(result.get().getLastName()).isEqualTo("Johnson");
+        authorDao.delete(result.get().getId());
     }
 
     @Test
@@ -58,5 +64,6 @@ class AuthorDaoJdbcImplTest {
         var updated = authorDao.update(new Author("Jan", "Kowalski"), createdAuthor.get().getId());
         var result = authorDao.getById(updated.get().getId());
         assertThat(result).isEqualTo(updated);
+        authorDao.delete(result.get().getId());
     }
 }
