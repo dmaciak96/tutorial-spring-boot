@@ -1,5 +1,6 @@
-package com.example.springboottutorial.dao;
+package com.example.springboottutorial.dao.jdbc;
 
+import com.example.springboottutorial.dao.AuthorDao;
 import com.example.springboottutorial.domain.Author;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @ComponentScan(basePackages = {"com.example.springboottutorial.dao"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class AuthorDaoImplTest {
+class AuthorDaoJdbcImplTest {
 
     @Autowired
     AuthorDao authorDao;

@@ -1,5 +1,6 @@
-package com.example.springboottutorial.dao;
+package com.example.springboottutorial.dao.jdbc;
 
+import com.example.springboottutorial.dao.AuthorDao;
 import com.example.springboottutorial.domain.Author;
 import org.springframework.stereotype.Component;
 
@@ -11,11 +12,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
-public class AuthorDaoImpl implements AuthorDao {
+public class AuthorDaoJdbcImpl implements AuthorDao {
 
     private final DataSource dataSource;
 
-    public AuthorDaoImpl(DataSource dataSource) {
+    public AuthorDaoJdbcImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
