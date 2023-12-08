@@ -2,10 +2,15 @@ package com.example.springboottutorial.dao;
 
 import com.example.springboottutorial.domain.Author;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public interface AuthorDao {
+
+    List<Author> findAll();
+
+    List<Author> listAuthorByLastName(String lastName);
 
     Optional<Author> getById(UUID id);
 

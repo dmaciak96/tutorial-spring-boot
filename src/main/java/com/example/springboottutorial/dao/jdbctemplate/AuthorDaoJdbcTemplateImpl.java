@@ -2,6 +2,7 @@ package com.example.springboottutorial.dao.jdbctemplate;
 
 import com.example.springboottutorial.dao.AuthorDao;
 import com.example.springboottutorial.domain.Author;
+import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,16 @@ public class AuthorDaoJdbcTemplateImpl implements AuthorDao {
 
     public AuthorDaoJdbcTemplateImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<Author> findAll() {
+        return null;
+    }
+
+    @Override
+    public List<Author> listAuthorByLastName(String lastName) {
+        return null;
     }
 
     @Override

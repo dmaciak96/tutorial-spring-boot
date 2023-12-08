@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import org.hibernate.annotations.JdbcTypeCode;
 
 import java.sql.Types;
@@ -11,6 +13,11 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "author_find_all", query = "FROM Author"),
+    @NamedQuery(name = "author_find_by_name", query =
+        "FROM Author a WHERE a.firstName = :firstName AND a.lastName = :lastName")
+})
 public class Author {
 
     @Id

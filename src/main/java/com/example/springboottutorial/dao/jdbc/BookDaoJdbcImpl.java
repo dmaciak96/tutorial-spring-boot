@@ -2,6 +2,7 @@ package com.example.springboottutorial.dao.jdbc;
 
 import com.example.springboottutorial.dao.BookDao;
 import com.example.springboottutorial.domain.Book;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -17,6 +18,11 @@ public class BookDaoJdbcImpl implements BookDao {
 
     public BookDaoJdbcImpl(DataSource dataSource) {
         this.dataSource = dataSource;
+    }
+
+    @Override
+    public List<Book> findAll() {
+        return null;
     }
 
     @Override

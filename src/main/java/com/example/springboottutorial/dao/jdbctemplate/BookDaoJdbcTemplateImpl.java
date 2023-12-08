@@ -2,6 +2,7 @@ package com.example.springboottutorial.dao.jdbctemplate;
 
 import com.example.springboottutorial.dao.BookDao;
 import com.example.springboottutorial.domain.Book;
+import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,11 @@ public class BookDaoJdbcTemplateImpl implements BookDao {
 
     public BookDaoJdbcTemplateImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<Book> findAll() {
+        return null;
     }
 
     @Override

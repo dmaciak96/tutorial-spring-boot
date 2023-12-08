@@ -2,6 +2,7 @@ package com.example.springboottutorial.dao.jdbc;
 
 import com.example.springboottutorial.dao.AuthorDao;
 import com.example.springboottutorial.domain.Author;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -18,6 +19,16 @@ public class AuthorDaoJdbcImpl implements AuthorDao {
 
     public AuthorDaoJdbcImpl(DataSource dataSource) {
         this.dataSource = dataSource;
+    }
+
+    @Override
+    public List<Author> findAll() {
+        return null;
+    }
+
+    @Override
+    public List<Author> listAuthorByLastName(String lastName) {
+        return null;
     }
 
     @Override
