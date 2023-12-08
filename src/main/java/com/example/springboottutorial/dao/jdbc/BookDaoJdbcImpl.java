@@ -2,7 +2,10 @@ package com.example.springboottutorial.dao.jdbc;
 
 import com.example.springboottutorial.dao.BookDao;
 import com.example.springboottutorial.domain.Book;
+
 import java.util.List;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -22,6 +25,16 @@ public class BookDaoJdbcImpl implements BookDao {
 
     @Override
     public List<Book> findAll() {
+        return null;
+    }
+
+    @Override
+    public List<Book> findAll(int pageSize, int offset) {
+        return null;
+    }
+
+    @Override
+    public List<Book> findAll(Pageable pageable) {
         return null;
     }
 

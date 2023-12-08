@@ -2,11 +2,12 @@ package com.example.springboottutorial.dao.jdbctemplate;
 
 import com.example.springboottutorial.dao.BookDao;
 import com.example.springboottutorial.domain.Book;
-import java.util.List;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,7 +22,18 @@ public class BookDaoJdbcTemplateImpl implements BookDao {
 
     @Override
     public List<Book> findAll() {
-        return null;
+        return jdbcTemplate.query("SELECT * FROM book", getRowMapper());
+    }
+
+    @Override
+    public List<Book> findAll(int pageSize, int offset) {
+        return jdbcTemplate.query("SELECT * FROM book LIMIT ? OFFSET ?", getRowMapper(), pageSize, offset);
+    }
+
+    @Override
+    public List<Book> findAll(Pageable pageable) {
+        return jdbcTemplate.query("SELECT * FROM book LIMIT ? OFFSET ?", getRowMapper(),
+                pageable.getPageSize(), pageable.getOffset());
     }
 
     @Override
