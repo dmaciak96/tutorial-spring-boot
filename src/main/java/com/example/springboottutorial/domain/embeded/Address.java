@@ -1,4 +1,4 @@
-package com.example.springboottutorial.domain;
+package com.example.springboottutorial.domain.embeded;
 
 import jakarta.persistence.Embeddable;
 

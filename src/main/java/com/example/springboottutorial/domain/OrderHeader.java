@@ -1,5 +1,7 @@
 package com.example.springboottutorial.domain;
 
+import com.example.springboottutorial.domain.embeded.Address;
+import com.example.springboottutorial.domain.enumtype.OrderStatus;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
