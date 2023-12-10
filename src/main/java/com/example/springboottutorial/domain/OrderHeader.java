@@ -1,19 +1,11 @@
 package com.example.springboottutorial.domain;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
-public class OrderHeader {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+public class OrderHeader extends BaseEntity {
 
     private String customerName;
 
@@ -22,14 +14,6 @@ public class OrderHeader {
 
     public OrderHeader(String customerName) {
         this.customerName = customerName;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getCustomerName() {
@@ -44,12 +28,13 @@ public class OrderHeader {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         OrderHeader that = (OrderHeader) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(customerName, that.customerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(super.hashCode(), customerName);
     }
 }
