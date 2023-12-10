@@ -23,6 +23,8 @@ class OrderHeaderRepositoryTest {
         assertThat(result).isNotNull();
         assertThat(result.getId()).isNotNull();
         assertThat(result.getCustomerName()).isEqualTo("Test");
+        assertThat(result.getCreatedDate()).isNotNull();
+        assertThat(result.getUpdatedDate()).isNotNull();
     }
 
     @Test
