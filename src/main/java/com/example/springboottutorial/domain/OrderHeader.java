@@ -11,6 +11,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -82,6 +83,14 @@ public class OrderHeader extends BaseEntity {
 
     public void setOrderLines(Set<OrderLine> orderLines) {
         this.orderLines = orderLines;
+    }
+
+    public void addOrderLine(OrderLine orderLine) {
+        if(orderLines == null) {
+            this.orderLines = new HashSet<>();
+        }
+        orderLine.setOrderHeader(this);
+        this.orderLines.add(orderLine);
     }
 
     @Override

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.Set;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,9 +33,7 @@ class OrderHeaderRepositoryTest {
         var orderHeader = new OrderHeader("Test");
         var orderLine = new OrderLine();
         orderLine.setQuantityOrdered(5);
-
-        orderHeader.setOrderLines(Set.of(orderLine));
-        orderLine.setOrderHeader(orderHeader);
+        orderHeader.addOrderLine(orderLine);
 
         var result = orderHeaderRepository.save(orderHeader);
         assertThat(result).isNotNull();
