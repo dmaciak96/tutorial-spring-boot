@@ -26,4 +26,10 @@ public class ProductRepositoryTest {
         assertThat(result.getDescription()).isEqualTo("test description");
         assertThat(result.getProductStatus()).isEqualTo(ProductStatus.NEW);
     }
+
+    @Test
+    void productGetWithCategory() {
+        var product = productRepository.findByDescription("PRODUCT1").orElseThrow();
+        assertThat(product.getCategories()).hasSize(2);
+    }
 }
