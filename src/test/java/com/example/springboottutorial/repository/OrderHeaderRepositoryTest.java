@@ -45,6 +45,12 @@ class OrderHeaderRepositoryTest {
         assertThat(result.getCreatedDate()).isNotNull();
         assertThat(result.getUpdatedDate()).isNotNull();
         assertThat(result.getOrderLines()).hasSize(1);
+
+        var resultOrderLine = result.getOrderLines().iterator().next();
+        assertThat(resultOrderLine.getId()).isNotNull();
+        assertThat(resultOrderLine.getCreatedDate()).isNotNull();
+        assertThat(resultOrderLine.getUpdatedDate()).isNotNull();
+        assertThat(resultOrderLine.getQuantityOrdered()).isEqualTo(5);
     }
 
     @Test
