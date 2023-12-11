@@ -93,6 +93,6 @@ public class OrderHeader extends BaseEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getCustomerName(), getShippingAddress(), getBillToAddress(), getOrderStatus());
+        return Objects.hash(super.hashCode(), getCustomerName(), getShippingAddress(), getBillToAddress(), getOrderStatus(), getOrderLines());
     }
 }
