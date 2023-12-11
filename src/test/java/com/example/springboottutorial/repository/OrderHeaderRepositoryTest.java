@@ -20,17 +20,16 @@ class OrderHeaderRepositoryTest {
 
     @Test
     void saveShouldGenerateProperUuid() {
-        var result = orderHeaderRepository.save(new OrderHeader("Test"));
+        var result = orderHeaderRepository.save(new OrderHeader());
         assertThat(result).isNotNull();
         assertThat(result.getId()).isNotNull();
-        assertThat(result.getCustomerName()).isEqualTo("Test");
         assertThat(result.getCreatedDate()).isNotNull();
         assertThat(result.getUpdatedDate()).isNotNull();
     }
 
     @Test
     void testSaveOrderWithLine() {
-        var orderHeader = new OrderHeader("Test");
+        var orderHeader = new OrderHeader();
         var orderLine = new OrderLine();
         orderLine.setQuantityOrdered(5);
         orderHeader.addOrderLine(orderLine);
@@ -38,7 +37,6 @@ class OrderHeaderRepositoryTest {
         var result = orderHeaderRepository.save(orderHeader);
         assertThat(result).isNotNull();
         assertThat(result.getId()).isNotNull();
-        assertThat(result.getCustomerName()).isEqualTo("Test");
         assertThat(result.getCreatedDate()).isNotNull();
         assertThat(result.getUpdatedDate()).isNotNull();
         assertThat(result.getOrderLines()).hasSize(1);
