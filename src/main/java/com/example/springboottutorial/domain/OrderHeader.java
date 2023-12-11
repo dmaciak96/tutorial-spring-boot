@@ -8,8 +8,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToMany;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @AttributeOverrides({
@@ -30,6 +32,9 @@ public class OrderHeader extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
+
+    @OneToMany(mappedBy = "orderHeader")
+    private Set<OrderLine> orderLines;
 
     public OrderHeader() {
     }
@@ -70,17 +75,24 @@ public class OrderHeader extends BaseEntity {
         this.orderStatus = orderStatus;
     }
 
+    public Set<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+
+    public void setOrderLines(Set<OrderLine> orderLines) {
+        this.orderLines = orderLines;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof OrderHeader that)) return false;
         if (!super.equals(o)) return false;
-        OrderHeader that = (OrderHeader) o;
-        return Objects.equals(customerName, that.customerName) && Objects.equals(shippingAddress, that.shippingAddress) && Objects.equals(billToAddress, that.billToAddress) && orderStatus == that.orderStatus;
+        return Objects.equals(getCustomerName(), that.getCustomerName()) && Objects.equals(getShippingAddress(), that.getShippingAddress()) && Objects.equals(getBillToAddress(), that.getBillToAddress()) && getOrderStatus() == that.getOrderStatus() && Objects.equals(getOrderLines(), that.getOrderLines());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), customerName, shippingAddress, billToAddress, orderStatus);
+        return Objects.hash(super.hashCode(), getCustomerName(), getShippingAddress(), getBillToAddress(), getOrderStatus());
     }
 }
