@@ -9,6 +9,8 @@ import com.example.springboottutorial.domain.enumtype.ProductStatus;
 import com.example.springboottutorial.repository.CustomerRepository;
 import com.example.springboottutorial.repository.OrderHeaderRepository;
 import com.example.springboottutorial.repository.ProductRepository;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -18,6 +20,7 @@ import org.springframework.test.annotation.Rollback;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * Created by jt on 5/28/22.
@@ -50,7 +53,7 @@ public class DataLoadTest {
         List<Product> products = loadProducts();
         Customer customer = loadCustomers();
 
-        int ordersToCreate = 100;
+        int ordersToCreate = 200;
 
         for (int i = 0; i < ordersToCreate; i++){
             System.out.println("Creating order #: " + i);
@@ -68,6 +71,25 @@ public class DataLoadTest {
 
         System.out.println("Order header id: " + orderHeader.getId());
         System.out.println("Customer Name is: " + orderHeader.getCustomer().getCustomerName());
+    }
+
+    @Test
+    void testN_PlusOneProblem() {
+        createTestData();
+        var customer = customerRepository.findCustomerByCustomerNameIgnoreCase(TEST_CUSTOMER).orElseThrow();
+
+        var totalOrdered = orderHeaderRepository.findAllByCustomer(customer).stream()
+                .flatMap(orderHeader -> orderHeader.getOrderLines().stream())
+                .collect(Collectors.summarizingInt(OrderLine::getQuantityOrdered));
+
+        System.out.println("Total Ordered: " + totalOrdered.getSum());
+    }
+
+    @AfterEach
+    public void deleteAll() {
+        orderHeaderRepository.deleteAll();
+        productRepository.deleteAll();
+        customerRepository.deleteAll();
     }
 
     private OrderHeader saveOrder(Customer customer, List<Product> products){
