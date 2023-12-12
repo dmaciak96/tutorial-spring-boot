@@ -11,6 +11,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -40,6 +41,9 @@ public class OrderHeader extends BaseEntity {
 
     @ManyToOne
     private Customer customer;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private OrderApproval orderApproval;
 
     public OrderHeader() {
     }
@@ -90,6 +94,14 @@ public class OrderHeader extends BaseEntity {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public OrderApproval getOrderApproval() {
+        return orderApproval;
+    }
+
+    public void setOrderApproval(OrderApproval orderApproval) {
+        this.orderApproval = orderApproval;
     }
 
     @Override
