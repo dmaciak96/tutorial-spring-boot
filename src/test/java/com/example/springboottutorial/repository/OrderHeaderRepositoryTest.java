@@ -1,7 +1,9 @@
 package com.example.springboottutorial.repository;
 
+import com.example.springboottutorial.domain.Customer;
 import com.example.springboottutorial.domain.OrderHeader;
 import com.example.springboottutorial.domain.OrderLine;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -10,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -17,6 +20,9 @@ class OrderHeaderRepositoryTest {
 
     @Autowired
     private OrderHeaderRepository orderHeaderRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Test
     void saveShouldGenerateProperUuid() {
@@ -46,6 +52,26 @@ class OrderHeaderRepositoryTest {
         assertThat(resultOrderLine.getCreatedDate()).isNotNull();
         assertThat(resultOrderLine.getUpdatedDate()).isNotNull();
         assertThat(resultOrderLine.getQuantityOrdered()).isEqualTo(5);
+    }
+
+    @Test
+    void testCascadeDelete() {
+        var orderHeader = new OrderHeader();
+        var customer = new Customer();
+        customer.setCustomerName("test");
+        orderHeader.setCustomer(customerRepository.save(customer));
+
+
+        var orderLine = new OrderLine();
+        orderLine.setQuantityOrdered(5);
+        orderHeader.addOrderLine(orderLine);
+
+        var saved = orderHeaderRepository.saveAndFlush(orderHeader);
+        orderHeaderRepository.deleteById(saved.getId());
+        orderHeaderRepository.flush();
+
+        var result = orderHeaderRepository.findById(saved.getId());
+        assertThat(result.isEmpty()).isTrue();
     }
 
     @Test
