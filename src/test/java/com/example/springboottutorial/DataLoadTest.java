@@ -43,6 +43,10 @@ public class DataLoadTest {
     @Rollback(value = false)
     @Test
     void testDataLoader() {
+        createTestData();
+    }
+
+    private List<OrderHeader> createTestData() {
         List<Product> products = loadProducts();
         Customer customer = loadCustomers();
 
@@ -54,6 +58,16 @@ public class DataLoadTest {
         }
 
         orderHeaderRepository.flush();
+        return orderHeaderRepository.findAll();
+    }
+
+    @Test
+    void testLazyVsEager() {
+        var orderHeaders = createTestData();
+        var orderHeader = orderHeaderRepository.findById(orderHeaders.get(0).getId()).orElseThrow();
+
+        System.out.println("Order header id: " + orderHeader.getId());
+        System.out.println("Customer Name is: " + orderHeader.getCustomer().getCustomerName());
     }
 
     private OrderHeader saveOrder(Customer customer, List<Product> products){
