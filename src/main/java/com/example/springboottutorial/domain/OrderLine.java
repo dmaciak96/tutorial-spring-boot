@@ -2,6 +2,7 @@ package com.example.springboottutorial.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Version;
 
 import java.util.Objects;
 
@@ -12,6 +13,9 @@ public class OrderLine extends BaseEntity {
 
     @ManyToOne
     private OrderHeader orderHeader;
+
+    @Version
+    private Integer version;
 
     @ManyToOne
     private Product product;

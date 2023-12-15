@@ -22,7 +22,6 @@ public class Bootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        optimisticLockingError();
     }
 
     private void optimisticLockingError() {
