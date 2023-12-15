@@ -7,6 +7,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Version;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -26,8 +27,19 @@ public class Customer extends BaseEntity {
     private String phone;
     private String email;
 
+    @Version
+    private Integer version;
+
     @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
     private Set<OrderHeader> orderHeaders;
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
 
     public String getCustomerName() {
         return customerName;
