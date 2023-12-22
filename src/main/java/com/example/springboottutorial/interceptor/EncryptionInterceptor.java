@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-@Component
+//@Component
 public class EncryptionInterceptor implements Interceptor {
 
     public static final String ON_SAVE = "onSave";
