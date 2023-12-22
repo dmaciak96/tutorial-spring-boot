@@ -1,5 +1,6 @@
 package com.example.springboottutorial.domain;
 
+import com.example.springboottutorial.interceptor.EncryptedString;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +14,8 @@ public class CreditCard {
     private Long id;
 
     private String ccv;
+
+    @EncryptedString
     private String creditCardNumber;
     private String expirationDate;
 
