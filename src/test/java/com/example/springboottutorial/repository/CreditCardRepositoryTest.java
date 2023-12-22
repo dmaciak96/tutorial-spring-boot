@@ -45,8 +45,8 @@ class CreditCardRepositoryTest {
         return creditCardRepository.save(creditCard);
     }
 
-    @AfterEach
-    void deleteAll() {
-        creditCardRepository.deleteAll();
-    }
+//    @AfterEach
+//    void deleteAll() {
+//        creditCardRepository.deleteAll();
+//    }
 }
