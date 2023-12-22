@@ -8,7 +8,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class ListenersRegistration implements BeanPostProcessor {
 
     private final PreInsertListener preInsertListener;

@@ -5,7 +5,7 @@ import org.hibernate.event.spi.PreInsertEvent;
 import org.hibernate.event.spi.PreInsertEventListener;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class PreInsertListener extends AbstractEncryptionListener implements PreInsertEventListener {
 
     public PreInsertListener(EncryptionService encryptionService) {

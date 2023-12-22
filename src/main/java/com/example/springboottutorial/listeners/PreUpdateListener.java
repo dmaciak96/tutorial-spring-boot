@@ -5,7 +5,7 @@ import org.hibernate.event.spi.PreUpdateEvent;
 import org.hibernate.event.spi.PreUpdateEventListener;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class PreUpdateListener extends AbstractEncryptionListener implements PreUpdateEventListener {
 
     public PreUpdateListener(EncryptionService encryptionService) {
