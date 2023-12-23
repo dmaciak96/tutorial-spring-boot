@@ -2,11 +2,13 @@ package com.example.springboottutorial.domain;
 
 import com.example.springboottutorial.interceptor.EncryptedString;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
+@EntityListeners(CreditCardJpaCallback.class)
 public class CreditCard {
 
     @Id
