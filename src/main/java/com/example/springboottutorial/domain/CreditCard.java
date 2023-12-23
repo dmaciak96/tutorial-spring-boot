@@ -1,14 +1,13 @@
 package com.example.springboottutorial.domain;
 
-import com.example.springboottutorial.interceptor.EncryptedString;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-@EntityListeners(CreditCardJpaCallback.class)
+//@EntityListeners(CreditCardJpaCallback.class)
 public class CreditCard {
 
     @Id
@@ -17,7 +16,8 @@ public class CreditCard {
 
     private String ccv;
 
-    @EncryptedString
+    //@EncryptedString
+    @Convert(converter = CreditCardConverter.class)
     private String creditCardNumber;
     private String expirationDate;
 
