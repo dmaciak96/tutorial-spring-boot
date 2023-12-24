@@ -1,4 +1,4 @@
-package com.example.springboottutorial.domain.config;
+package com.example.springboottutorial.config;
 
 import lombok.Getter;
 import org.springframework.beans.BeansException;

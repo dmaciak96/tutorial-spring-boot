@@ -1,6 +1,6 @@
 package com.example.springboottutorial.domain;
 
-import com.example.springboottutorial.domain.config.SpringContextHelper;
+import com.example.springboottutorial.config.SpringContextHelper;
 import com.example.springboottutorial.service.EncryptionService;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
