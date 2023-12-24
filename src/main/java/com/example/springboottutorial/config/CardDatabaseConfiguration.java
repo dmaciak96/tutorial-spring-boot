@@ -29,6 +29,7 @@ public class CardDatabaseConfiguration {
     }
 
     @Bean
+    @ConfigurationProperties("spring.two.datasource.hikari")
     public DataSource cardDataSource(@Qualifier("cardDataSourceProperties") DataSourceProperties cardDataSourceProperties) {
         return cardDataSourceProperties.initializeDataSourceBuilder()
                 .type(HikariDataSource.class)
@@ -37,7 +38,7 @@ public class CardDatabaseConfiguration {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean cardEntityManager(@Qualifier("cardDataSource") DataSource dataSource,
-                                                                    EntityManagerFactoryBuilder builder) {
+                                                                    @Qualifier("entityManagerFactoryBuilder") EntityManagerFactoryBuilder builder) {
         return builder.dataSource(dataSource)
                 .packages(CreditCard.class)
                 .persistenceUnit("card")
